@@ -1,0 +1,18 @@
+package io.github.jna6.hsrteambuilder.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class BuildVariant {
+    String playstyle; //Break, Dual DPS...
+    private List<TeamComposition> teamCompositions;
+    private List<TeammateRecommendation> teammateRecommendations;
+}

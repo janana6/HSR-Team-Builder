@@ -15,6 +15,6 @@ public class CharacterBuildResponse {
     private String name;
     private String element;
     private String path;
-    private List<TeammateRecommendation> teammateRecommendations;
-    private List<TeamComposition> teamCompositions;
+
+    private List<BuildVariant> variants;
 }

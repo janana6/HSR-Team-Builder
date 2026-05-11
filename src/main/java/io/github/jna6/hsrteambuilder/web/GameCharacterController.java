@@ -1,41 +1,32 @@
 package io.github.jna6.hsrteambuilder.web;
 
 import io.github.jna6.hsrteambuilder.dto.CharacterBuildResponse;
-import io.github.jna6.hsrteambuilder.model.GameCharacter;
-
 import io.github.jna6.hsrteambuilder.service.GameCharacterService;
-import lombok.AllArgsConstructor;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/characters")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class GameCharacterController {
 
     private final GameCharacterService characterService;
 
     @GetMapping
-    public List<GameCharacter> getAllCharacters(){
+    public List<?> getAllCharacters() {
         return characterService.getAllCharacters();
     }
 
     @GetMapping("/filter")
-    public List<GameCharacter> filterCharacters(
+    public List<?> filterCharacters(
             @RequestParam(required = false) String role,
             @RequestParam(required = false) String element,
             @RequestParam(required = false) String path,
             @RequestParam(required = false) String rarity
-
     ) {
-        return characterService.getAllCharacters().stream()
-                .filter(c -> role == null || c.getRole().equalsIgnoreCase(role))
-                .filter(c -> element == null || c.getElement().equalsIgnoreCase(element))
-                .filter(c -> path == null || c.getPath().equalsIgnoreCase(path))
-                .filter(c -> rarity == null || c.getRarity().equalsIgnoreCase(rarity))
-                .toList();
+        return characterService.filterCharacters(role, element, path, rarity);
     }
 
     @GetMapping("/build/{name}")
