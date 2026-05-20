@@ -24,6 +24,7 @@ public class GameCharacter {
     private String role;
     private String element;
     private String playstyle;
+    private String iconUrl;
 
     @ManyToMany(mappedBy = "ownedCharacters")
     private Set<User> users = new HashSet<>();

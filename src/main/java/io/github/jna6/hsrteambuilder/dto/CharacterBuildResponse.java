@@ -15,6 +15,7 @@ public class CharacterBuildResponse {
     private String name;
     private String element;
     private String path;
+    private String iconUrl;
 
     private List<BuildVariant> variants;
 }

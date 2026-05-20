@@ -38,6 +38,7 @@ public class GameCharacterService {
         build.setName(character.getName());
         build.setElement(character.getElement());
         build.setPath(character.getPath());
+        build.setIconUrl(character.getIconUrl());
 
         return build;
     }

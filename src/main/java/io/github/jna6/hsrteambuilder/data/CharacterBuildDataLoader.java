@@ -26,6 +26,9 @@ public class CharacterBuildDataLoader {
         add("Boothill", boothillBuild());
         add("Rappa", rappaBuild());
         add("Himeko", himekoBuild());
+        add("Kafka", kafkaBuild());
+        add("Acheron", acheronBuild());
+
     }
 
     private void add(String name, CharacterBuildResponse build) {
@@ -199,7 +202,7 @@ public class CharacterBuildDataLoader {
                                 rec(AMPLIFIER,
                                         List.of("Ruan Mei"),
                                         List.of("Tribbie","Cipher"),
-                                        List.of("Asta")
+                                        List.of("Guinaifen")
                                 ),
                                 rec(SUSTAIN,
                                         List.of("Dan Heng Permansor Terrae", "Huohuo"),
@@ -210,23 +213,23 @@ public class CharacterBuildDataLoader {
                 )
         );
     }
-    private CharacterBuildResponse kafkaBuild() {
+    private CharacterBuildResponse blackswanBuild() {
         return response(
                 variant(
                         "DoT",
                         List.of(
                                 team("BiS Team", "Kafka", "Hysilens", "Black Swan", "Dan Heng Permansor Terrae"),
-                                team("F2P Team", "Kafka", "Sampo", "Asta", "Gallagher")
+                                team("F2P Team", "Black Swan", "Sampo", "Asta", "Gallagher")
                         ),
                         List.of(
                                 rec("DoT Partners",
-                                        List.of("Hysilens", "Black Swan"),
+                                        List.of("Hysilens", "Kafka"),
                                         List.of("Jiaoqiu"),
                                         List.of("Sampo","Serval")
                                 ),
                                 rec(AMPLIFIER,
                                         List.of("Ruan Mei"),
-                                        List.of("Tribbie","Cipher","Robin"),
+                                        List.of("Tribbie","Cipher"),
                                         List.of("Asta")
                                 ),
                                 rec(SUSTAIN,
@@ -238,4 +241,29 @@ public class CharacterBuildDataLoader {
                 )
         );
     }
+
+    private CharacterBuildResponse acheronBuild() {
+        return response(
+                variant(
+                        "Debuff Hypercarry",
+                        List.of(
+                                team("BiS Team", "Acheron", "Cipher", "Jiaoqiu", "Aventurine"),
+                                team("F2P Team", "Acheron", "Pela", "Guinaifen", "Gallagher")
+                        ),
+                        List.of(
+                                rec("Debuffers",
+                                        List.of("Cipher", "Jiaoqiu"),
+                                        List.of("Silver Wolf"),
+                                        List.of("Pela", "Guinaifen")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Aventurine"),
+                                        List.of("Fu Xuan", "Huohuo"),
+                                        List.of("Gallagher")
+                                )
+                        )
+                )
+        );
+    }
+
 }
