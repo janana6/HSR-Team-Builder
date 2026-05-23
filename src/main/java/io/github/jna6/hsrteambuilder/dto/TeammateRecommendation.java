@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeammateRecommendation {
-    private String name; // Amplifiers / Sustain / etc
+    private String type; // Amplifiers / Sustain / etc
     private List<String> bis;
     private List<String> generalist;
     private List<String> f2p;

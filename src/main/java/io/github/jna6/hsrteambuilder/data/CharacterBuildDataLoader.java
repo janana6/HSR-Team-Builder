@@ -19,7 +19,8 @@ public class CharacterBuildDataLoader {
     private static final String AMPLIFIER = "Amplifier";
     private static final String SUSTAIN = "Sustain";
     private static final String DPS = "DPS";
-
+    private static final String DOT_PARTNER = "DoT Partner";
+    private static final String DEBUFFER = "Debuffer";
     @PostConstruct
     public void init() {
         add("Firefly", fireflyBuild());
@@ -28,6 +29,7 @@ public class CharacterBuildDataLoader {
         add("Himeko", himekoBuild());
         add("Kafka", kafkaBuild());
         add("Acheron", acheronBuild());
+        add("Black Swan", blackswanBuild());
 
     }
 
@@ -40,16 +42,15 @@ public class CharacterBuildDataLoader {
     }
 
     // ===== Helpers =====
-
     private TeamComposition team(String name, String... members) {
         return new TeamComposition(name, List.of(members));
     }
 
-    private TeammateRecommendation rec(String role,
+    private TeammateRecommendation rec(String type,
                                        List<String> bis,
                                        List<String> generalist,
                                        List<String> f2p) {
-        return new TeammateRecommendation(role, bis, generalist, f2p);
+        return new TeammateRecommendation(type, bis, generalist, f2p);
     }
 
     private BuildVariant variant(String name,
@@ -161,7 +162,9 @@ public class CharacterBuildDataLoader {
                 variant(
                         "Dual DPS",
                         List.of(
-                                team("BiS Team", "Himeko", "The Herta", "Tribbie", "Aventurine")
+                                team("BiS Team", "Himeko", "The Herta", "Tribbie", "Aventurine"),
+                                team("F2P Team", "Himeko", "Herta", "Pela", "Gallagher")
+
                         ),
                         List.of(
                                 rec(DPS,
@@ -194,7 +197,7 @@ public class CharacterBuildDataLoader {
                                 team("F2P Team", "Kafka", "Sampo", "Asta", "Gallagher")
                         ),
                         List.of(
-                                rec("DoT Partners",
+                                rec(DOT_PARTNER,
                                         List.of("Hysilens", "Black Swan"),
                                         List.of("Jiaoqiu"),
                                         List.of("Sampo","Serval")
@@ -222,7 +225,7 @@ public class CharacterBuildDataLoader {
                                 team("F2P Team", "Black Swan", "Sampo", "Asta", "Gallagher")
                         ),
                         List.of(
-                                rec("DoT Partners",
+                                rec(DOT_PARTNER,
                                         List.of("Hysilens", "Kafka"),
                                         List.of("Jiaoqiu"),
                                         List.of("Sampo","Serval")
@@ -251,7 +254,7 @@ public class CharacterBuildDataLoader {
                                 team("F2P Team", "Acheron", "Pela", "Guinaifen", "Gallagher")
                         ),
                         List.of(
-                                rec("Debuffers",
+                                rec(DEBUFFER,
                                         List.of("Cipher", "Jiaoqiu"),
                                         List.of("Silver Wolf"),
                                         List.of("Pela", "Guinaifen")

@@ -39,6 +39,7 @@ public class GameCharacterService {
         build.setElement(character.getElement());
         build.setPath(character.getPath());
         build.setIconUrl(character.getIconUrl());
+        build.setRarity(character.getRarity());
 
         return build;
     }
