@@ -49,10 +49,18 @@ public class CharacterBuildDataLoader {
         add("Himeko Nova", himekonovaBuild());
         add("Gilgamesh", gilgameshBuild());
         add("Feixiao", feixiaoBuild());
-        add("Robin Summeretto",robinSummerettoBuild());
-        add("Rin Tohsaka",rinBuild());
-        add("The Herta",thehertaBuild());
-        add("Jade",jadeBuild());
+        add("Robin Summeretto", robinSummerettoBuild());
+        add("Rin Tohsaka", rinBuild());
+        add("The Herta", thehertaBuild());
+        add("Jade", jadeBuild());
+        add("Phainon", phainonBuild());
+        add("Mydei", mydeiBuild());
+        add("Jing Yuan", jingyuanBuild());
+        add("Jingliu", jingliuBuild());
+        add("Saber", saberBuild());
+        add("Seele", seeleBuild());
+        add("Silver Wolf", silverwolfBuild());
+        add("Silver Wolf LV.999", silverwolflv999Build());
     }
 
     private void add(String name, CharacterBuildResponse build) {
@@ -456,12 +464,12 @@ public class CharacterBuildDataLoader {
                                 team("F2P Team", "Archer", "Trailblazer (Remembrance)", "Hanya", "Lynx")),
                         List.of(
                                 rec(AMPLIFIER,
-                                        List.of("Rin Tohsaka","Sparkle", "Cipher"),
+                                        List.of("Rin Tohsaka", "Sparkle", "Cipher"),
                                         List.of("Yao Guang", "Sunday", "Silver Wolf"),
                                         List.of("Hanya", "Trailblazer (Remembrance)", "Tingyun")
                                 ),
                                 rec(SUSTAIN,
-                                        List.of("Huohuo","Dan Heng Permansor Terrae","Fu Xuan"),
+                                        List.of("Huohuo", "Dan Heng Permansor Terrae", "Fu Xuan"),
                                         List.of("Hyacine", "Aventurine"),
                                         List.of("Lynx")
                                 )
@@ -635,6 +643,15 @@ public class CharacterBuildDataLoader {
                                         List.of("Gallagher", "Lynx")
                                 )
                         )
+                ),
+                variant(
+                        "Archer Team",
+                        List.of(
+                                team("BiS Team", "Archer", "Rin Tohsaka", "Cerydra", "Sparkle")
+                        ),
+                        List.of(
+
+                        )
                 )
         );
     }
@@ -700,6 +717,54 @@ public class CharacterBuildDataLoader {
                         ),
                         List.of(
 
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse mydeiBuild() {
+        return response(
+                variant(
+                        "Main DPS Team",
+                        List.of(
+                                team("BiS Team", "Mydei", "Tribbie", "Cyrene", "Hyacine"),
+                                team("F2P Team", "Mydei", "Trailblazer (Remembrance)", "Tingyun", "Gallagher")
+                        ),
+                        List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Tribbie", "Cyrene", "Cerydra"),
+                                        List.of("Sunday", "Sparkle", "Ruan Mei"),
+                                        List.of("Trailblazer (Remembrance)")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Hyacine"),
+                                        List.of("Huohuo", "Luocha"),
+                                        List.of("Gallagher")
+                                )
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse phainonBuild() {
+        return response(
+                variant(
+                        "Main DPS Team",
+                        List.of(
+                                team("BiS Team", "Phainon", "Cerydra", "Sunday", "Dan Heng Permansor Terrae"),
+                                team("F2P Team", "Phainon", "Trailblazer (Remembrance)", "Tingyun", "Gallagher")
+                        ),
+                        List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Sunday", "Cerydra", "Cyrene"),
+                                        List.of("Sparkle", "Ruan Mei"),
+                                        List.of("Trailblazer (Remembrance)")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Dan Heng Permansor Terrae", "Huohuo"),
+                                        List.of("Aventurine"),
+                                        List.of("Gallagher")
+                                )
                         )
                 )
         );
@@ -856,7 +921,7 @@ public class CharacterBuildDataLoader {
     private CharacterBuildResponse gilgameshBuild() {
         return response(
                 variant(
-                        "Gilgamesh Saber Team",
+                        "Saber Team",
                         List.of(
                                 team("BiS Team", "Gilgamesh", "Saber", "Mortenax Blade", "Huohuo"),
                                 team("F2P", "Gilgamesh", "Saber", "Trailblazer (Remembrance)", "Gallagher")
@@ -864,7 +929,7 @@ public class CharacterBuildDataLoader {
                         List.of(
                                 rec(AMPLIFIER,
                                         List.of("Mortenax Blade", "Tribbie"),
-                                        List.of("Ashveil", "Robin"),
+                                        List.of("Robin"),
                                         List.of("Trailblazer (Remembrance)")),
                                 rec(SUSTAIN,
                                         List.of("Huohuo", "Dan Heng Permansor Terrae"),
@@ -880,6 +945,47 @@ public class CharacterBuildDataLoader {
                         ),
                         List.of(
 
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse saberBuild() {
+        return response(
+                variant(
+                        "Gilgamesh Team",
+                        List.of(
+                                team("BiS Team", "Gilgamesh", "Saber", "Mortenax Blade", "Huohuo"),
+                                team("F2P", "Gilgamesh", "Saber", "Trailblazer (Remembrance)", "Gallagher")
+                        ), List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Mortenax Blade", "Tribbie"),
+                                        List.of("Robin"),
+                                        List.of("Trailblazer (Remembrance)")),
+                                rec(SUSTAIN,
+                                        List.of("Huohuo", "Dan Heng Permansor Terrae"),
+                                        List.of("Hyacine"),
+                                        List.of("Gallagher")
+                                )
+                        )
+                ),
+                variant(
+                        "Main DPS Team",
+                        List.of(
+                                team("BiS Team", "Saber", "Sunday", "Trailblazer (Remebrance)", "Dan Heng Permansor Terrae"),
+                                team("F2P", "Saber", "Tingyun", "Trailblazer (Remebrance)", "Gallagher")
+                        ),
+                        List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Trailblazer (Remebrance)", "Sunday"),
+                                        List.of("Cyrene", "Robin", "Sparkle"),
+                                        List.of("Tingyun")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Dan Heng Permansor Terrae", "Huohuo"),
+                                        List.of("Hyacine", "Luocha"),
+                                        List.of("Gallagher")
+                                )
                         )
                 )
         );
@@ -926,7 +1032,7 @@ public class CharacterBuildDataLoader {
                                 rec(AMPLIFIER,
                                         List.of("Evernight", "Cyrene", "Mortenax Blade"),
                                         List.of("Tribbie"),
-                                        List.of("Trailblazer(Remembrance)")
+                                        List.of("Trailblazer (Remembrance)")
                                 )
                         )
                 ),
@@ -968,6 +1074,7 @@ public class CharacterBuildDataLoader {
                 )
         );
     }
+
     private CharacterBuildResponse rinBuild() {
         return response(
                 variant(
@@ -987,11 +1094,11 @@ public class CharacterBuildDataLoader {
                         List.of(
                                 rec(AMPLIFIER,
                                         List.of("Sparkle", "Robin"),
-                                        List.of("Mortenax Blade", "Cipher","Tribbie"),
+                                        List.of("Mortenax Blade", "Cipher", "Tribbie"),
                                         List.of("Trailblazer (Remembrance)")
                                 ),
                                 rec(SUSTAIN,
-                                        List.of("Huohuo","Dan Heng Permansor Terrae","Fu Xuan"),
+                                        List.of("Huohuo", "Dan Heng Permansor Terrae", "Fu Xuan"),
                                         List.of("Hyacine", "Aventurine"),
                                         List.of("Lynx")
                                 )
@@ -999,6 +1106,7 @@ public class CharacterBuildDataLoader {
                 )
         );
     }
+
     private CharacterBuildResponse thehertaBuild() {
         return response(
                 variant(
@@ -1010,13 +1118,13 @@ public class CharacterBuildDataLoader {
                         List.of(
                                 rec(AMPLIFIER,
                                         List.of("Tribbie"),
-                                        List.of("Robiin"),
-                                        List.of("Trailblazer (Remembrance)","Asta")
+                                        List.of("Robin"),
+                                        List.of("Trailblazer (Remembrance)", "Asta")
                                 ),
                                 rec(SUSTAIN,
-                                        List.of("Dan Heng Permansor Terrae","Lingsha"),
-                                        List.of("Huohuo","Aventurine"),
-                                        List.of("Gallagher","Lynx")
+                                        List.of("Dan Heng Permansor Terrae", "Lingsha"),
+                                        List.of("Huohuo", "Aventurine"),
+                                        List.of("Gallagher", "Lynx")
                                 )
                         )
                 ),
@@ -1031,6 +1139,7 @@ public class CharacterBuildDataLoader {
 
         );
     }
+
     private CharacterBuildResponse jadeBuild() {
         return response(
                 variant(
@@ -1049,6 +1158,135 @@ public class CharacterBuildDataLoader {
                         ),
                         List.of(
 
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse jingyuanBuild() {
+        return response(
+                variant(
+                        "Main DPS Team",
+                        List.of(
+                                team("BiS Team", "Jing Yuan", "Tribbie", "Sunday", "Dan Heng Permansor Terrae"),
+                                team("F2P Team", "Jing Yuan", "Tingyun", "Pela", "Gallagher")
+                        ),
+                        List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Tribbie", "Sunday", "Robin"),
+                                        List.of("Cipher", "Sparkle", "Ruan Mei"),
+                                        List.of("Tingyun", "Pela", "Bronya")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Dan Heng Permansor Terrae", "Aventurine", "Huohuo"),
+                                        List.of("Hyacine"),
+                                        List.of("Gallagher")
+                                )
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse jingliuBuild() {
+        return response(
+                variant(
+                        "Mortenax Blade Team",
+                        List.of(
+                                team("BiS Team", "Jingliu", "Mortenax Blade", "Trailblazer (Remebrance)", "Hyacine")),
+                        List.of(
+
+                        )
+                ),
+                variant(
+                        "Main DPS Team",
+                        List.of(
+                                team("BiS Team", "Jingliu", "Tribbie", "Sunday", "Hyacine"),
+                                team("F2P Team", "Jingliu", "Asta", "Trailblazer (Remebrance)", "Lynx")
+                        ),
+                        List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Tribbie", "Sunday"),
+                                        List.of("Cipher", "Silver Wolf", "Ruan Mei"),
+                                        List.of("Trailblazer (Remebrance)", "Asta", "Bronya")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Hyacine"),
+                                        List.of("Huohuo", "Luocha"),
+                                        List.of("Lynx", "Gallagher")
+                                )
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse seeleBuild() {
+        return response(
+                variant(
+                        "Main DPS Team",
+                        List.of(
+                                team("BiS Team", "Seele", "Sparkle", "Sunday", "Dan Heng Permansor Terrae"),
+                                team("F2P Team", "Seele", "Tingyun", "Hanya", "Gallagher")
+                        ),
+                        List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Sparkle", "Sunday", "Cerydra"),
+                                        List.of("Tribbie", "Robin", "Cipher"),
+                                        List.of("Trailblazer (Remebrance)", "Asta", "Bronya")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Dan Heng Permansor Terrae"),
+                                        List.of("Hyacine"),
+                                        List.of("Gallagher")
+                                )
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse silverwolfBuild() {
+        return response(
+                variant(
+                        "Archer Team",
+                        List.of(
+                                team("BiS Team", "Archer", "Silver Wolf", "Sparkle", "Dan Heng Permansor Terrae"),
+                                team("BiS Team", "Archer", "Silver Wolf", "Sparkle", "Rin Tohsaka")
+                        ),
+                        List.of(
+
+                        )
+                ),
+                variant(
+                        "Acheron Team",
+                        List.of(
+                                team("BiS Team", "Acheron", "Silver Wolf", "Mortenax Blade", "Hyacine"),
+                                team("Sustainless Team", "Acheron", "Silver Wolf", "Mortenax Blade", "Tribbie")
+                        ),
+                        List.of(
+
+                        )
+                )
+        );
+    }
+
+    private CharacterBuildResponse silverwolflv999Build() {
+        return response(
+                variant(
+                        "Elation Team",
+                        List.of(
+                                team("BiS Team", "Silver Wolf LV.999", "Sparxie", "Yao Guang", "Huohuo"),
+                                team("BiS Team", "Silver Wolf LV.999", "Tralblazer (Elation)", "Yao Guang", "Huohuo")
+                        ),
+                        List.of(
+                                rec(AMPLIFIER,
+                                        List.of("Sparxie", "Yao Guang", "Tralblazer (Elation)"),
+                                        List.of("Evanescia"),
+                                        List.of("Asta")
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Huohuo"),
+                                        List.of("Dan Heng Permansor Terrae", "Fu Xuan"),
+                                        List.of("Gallagher")
+                                )
                         )
                 )
         );
