@@ -1,12 +1,15 @@
 package io.github.jna6.hsrteambuilder.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Getter
 @Setter

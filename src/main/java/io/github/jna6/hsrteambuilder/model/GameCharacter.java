@@ -1,5 +1,6 @@
 package io.github.jna6.hsrteambuilder.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,5 +28,7 @@ public class GameCharacter {
     private String iconUrl;
 
     @ManyToMany(mappedBy = "ownedCharacters")
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
+
 }
