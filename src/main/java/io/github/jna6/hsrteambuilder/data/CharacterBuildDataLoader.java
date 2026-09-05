@@ -61,6 +61,7 @@ public class CharacterBuildDataLoader {
         add("Seele", seeleBuild());
         add("Silver Wolf", silverwolfBuild());
         add("Silver Wolf LV.999", silverwolflv999Build());
+        add("Hysilens", hysilensBuild());
     }
 
     private void add(String name, CharacterBuildResponse build) {
@@ -781,7 +782,7 @@ public class CharacterBuildDataLoader {
                         List.of(
                                 rec(AMPLIFIER,
                                         List.of("Sunday", "Robin"),
-                                        List.of("Cypher", "Sparkle", "Tribbie"),
+                                        List.of("Cipher", "Sparkle", "Tribbie"),
                                         List.of("Trailblazer (Remembrance)", "Tingyun")
                                 ),
                                 rec(SUSTAIN,
@@ -972,12 +973,12 @@ public class CharacterBuildDataLoader {
                 variant(
                         "Main DPS Team",
                         List.of(
-                                team("BiS Team", "Saber", "Sunday", "Trailblazer (Remebrance)", "Dan Heng Permansor Terrae"),
-                                team("F2P", "Saber", "Tingyun", "Trailblazer (Remebrance)", "Gallagher")
+                                team("BiS Team", "Saber", "Sunday", "Trailblazer (Remembrance)", "Dan Heng Permansor Terrae"),
+                                team("F2P", "Saber", "Tingyun", "Trailblazer (Remembrance)", "Gallagher")
                         ),
                         List.of(
                                 rec(AMPLIFIER,
-                                        List.of("Trailblazer (Remebrance)", "Sunday"),
+                                        List.of("Trailblazer (Remembrance)", "Sunday"),
                                         List.of("Cyrene", "Robin", "Sparkle"),
                                         List.of("Tingyun")
                                 ),
@@ -1192,7 +1193,7 @@ public class CharacterBuildDataLoader {
                 variant(
                         "Mortenax Blade Team",
                         List.of(
-                                team("BiS Team", "Jingliu", "Mortenax Blade", "Trailblazer (Remebrance)", "Hyacine")),
+                                team("BiS Team", "Jingliu", "Mortenax Blade", "Trailblazer (Remembrance)", "Hyacine")),
                         List.of(
 
                         )
@@ -1201,13 +1202,13 @@ public class CharacterBuildDataLoader {
                         "Main DPS Team",
                         List.of(
                                 team("BiS Team", "Jingliu", "Tribbie", "Sunday", "Hyacine"),
-                                team("F2P Team", "Jingliu", "Asta", "Trailblazer (Remebrance)", "Lynx")
+                                team("F2P Team", "Jingliu", "Asta", "Trailblazer (Remembrance)", "Lynx")
                         ),
                         List.of(
                                 rec(AMPLIFIER,
                                         List.of("Tribbie", "Sunday"),
                                         List.of("Cipher", "Silver Wolf", "Ruan Mei"),
-                                        List.of("Trailblazer (Remebrance)", "Asta", "Bronya")
+                                        List.of("Trailblazer (Remembrance)", "Asta", "Bronya")
                                 ),
                                 rec(SUSTAIN,
                                         List.of("Hyacine"),
@@ -1231,7 +1232,7 @@ public class CharacterBuildDataLoader {
                                 rec(AMPLIFIER,
                                         List.of("Sparkle", "Sunday", "Cerydra"),
                                         List.of("Tribbie", "Robin", "Cipher"),
-                                        List.of("Trailblazer (Remebrance)", "Asta", "Bronya")
+                                        List.of("Trailblazer (Remembrance)", "Asta", "Bronya")
                                 ),
                                 rec(SUSTAIN,
                                         List.of("Dan Heng Permansor Terrae"),
@@ -1274,17 +1275,45 @@ public class CharacterBuildDataLoader {
                         "Elation Team",
                         List.of(
                                 team("BiS Team", "Silver Wolf LV.999", "Sparxie", "Yao Guang", "Huohuo"),
-                                team("BiS Team", "Silver Wolf LV.999", "Tralblazer (Elation)", "Yao Guang", "Huohuo")
+                                team("BiS Team", "Silver Wolf LV.999", "Trailblazer (Elation)", "Yao Guang", "Huohuo")
                         ),
                         List.of(
                                 rec(AMPLIFIER,
-                                        List.of("Sparxie", "Yao Guang", "Tralblazer (Elation)"),
+                                        List.of("Sparxie", "Yao Guang", "Trailblazer (Elation)"),
                                         List.of("Evanescia"),
                                         List.of("Asta")
                                 ),
                                 rec(SUSTAIN,
                                         List.of("Huohuo"),
                                         List.of("Dan Heng Permansor Terrae", "Fu Xuan"),
+                                        List.of("Gallagher")
+                                )
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse hysilensBuild() {
+        return response(
+                variant(
+                        "DoT",
+                        List.of(
+                                team("BiS Team", "Kafka", "Hysilens", "Black Swan", "Dan Heng Permansor Terrae"),
+                                team("F2P Team", "Hysilens", "Serval", "Asta", "Gallagher")
+                        ),
+                        List.of(
+                                rec(DOT_PARTNER,
+                                        List.of("Kafka", "Black Swan"),
+                                        List.of("Jiaoqiu"),
+                                        List.of("Sampo", "Serval","Luka")
+                                ),
+                                rec(AMPLIFIER,
+                                        List.of("Ruan Mei"),
+                                        List.of(),
+                                        List.of()
+                                ),
+                                rec(SUSTAIN,
+                                        List.of("Dan Heng Permansor Terrae", "Huohuo"),
+                                        List.of("Hyacine"),
                                         List.of("Gallagher")
                                 )
                         )
