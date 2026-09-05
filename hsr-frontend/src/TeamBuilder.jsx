@@ -27,25 +27,69 @@ function TeamBuilder() {
             behavior: "smooth"
         });
     };
-    // const roleLabels = {
-    //     AMPLIFIER: "Amplifier",
-    //     SUSTAIN: "Sustain",
-    //     DOT_PARTNER: "Dot Partner",
-    //     DPS: "DPS",
-    //     DEBUFFER: "Debuffer"
-    // };
+    const [ownedCharacterIds, setOwnedCharacterIds] = useState(() => {
+        try {
+            return new Set(JSON.parse(localStorage.getItem("ownedCharacterIds") || "[]"));
+        } catch {
+            return new Set();
+        }
+    });
 
-    // const fetchCharacterBuild = (characterName) => {
-    //     setLoadingBuild(true);
-    //     fetch(`http://localhost:8080/characters/build/${characterName}`)
-    //         .then((res) => res.json())
-    //         .then((data) => {
-    //             console.log("BUILD DATA:", data);
-    //             setCharacterBuild(data);
-    //         })
-    //         .catch((err) => console.log("ERROR:", err))
-    //         .finally(() => setLoadingBuild(false));
-    // };
+    // Edit roster mode: user can stage changes then Save or Cancel
+    const [isEditingRoster, setIsEditingRoster] = useState(false);
+    const [stagedOwnedIds, setStagedOwnedIds] = useState(new Set());
+
+    const toggleOwned = (characterId) => {
+        setOwnedCharacterIds((current) => {
+            const next = new Set(current);
+
+            if (next.has(characterId)) next.delete(characterId);
+            else next.add(characterId);
+
+            localStorage.setItem("ownedCharacterIds", JSON.stringify([...next]));
+            return next;
+        });
+    };
+
+    // Roster editing helpers
+    const startEditRoster = () => {
+        setStagedOwnedIds(new Set(ownedCharacterIds));
+        setIsEditingRoster(true);
+    };
+
+    const cancelEditRoster = () => {
+        setStagedOwnedIds(new Set());
+        setIsEditingRoster(false);
+    };
+
+    const saveEditRoster = () => {
+        setOwnedCharacterIds(new Set(stagedOwnedIds));
+        localStorage.setItem("ownedCharacterIds", JSON.stringify([...stagedOwnedIds]));
+        setIsEditingRoster(false);
+    };
+
+    const toggleStagedOwned = (characterId) => {
+        setStagedOwnedIds((current) => {
+            const next = new Set(current);
+            if (next.has(characterId)) next.delete(characterId);
+            else next.add(characterId);
+            return next;
+        });
+    };
+
+    const toggleSelectAllFor = (chars) => {
+        const ids = chars.map((c) => c.id);
+        const allSelected = ids.length > 0 && ids.every((id) => stagedOwnedIds.has(id));
+        setStagedOwnedIds((current) => {
+            const next = new Set(current);
+            if (allSelected) {
+                ids.forEach((id) => next.delete(id));
+            } else {
+                ids.forEach((id) => next.add(id));
+            }
+            return next;
+        });
+    };
 
     useEffect(() => {
         fetch("http://localhost:8080/characters")
@@ -80,6 +124,18 @@ function TeamBuilder() {
         };
         loadBuild();
     }, [name]);
+
+    // Precompute filtered/sorted characters for grid and select-all behavior
+    const filteredCharacters = characters
+        .filter((c) => {
+            const roleMatch = roleFilter === "All" || c.role === roleFilter;
+            const elementMatch = elementFilter === "All" || c.element === elementFilter;
+            const searchMatch = c.name.toLowerCase().includes(search.toLowerCase());
+            const pathMatch = pathFilter === "All" || c.path === pathFilter;
+            const rarityMatch = rarityFilter === "All" || String(c.rarity) === rarityFilter;
+            return roleMatch && elementMatch && pathMatch && rarityMatch && searchMatch;
+        })
+        .sort((a, b) => a.name.localeCompare(b.name));
 
     return (
         <div
@@ -213,24 +269,92 @@ function TeamBuilder() {
                             <option value="Abundance">Abundance</option>
                             <option value="Preservation">Preservation</option>
                         </select>
-                        <button
-                            onClick={resetFilters}
-                            style={{
-                                width: "15%",
-                                marginTop: "10px",
-                                marginLeft: "auto",
-                                display: "block",
-                                padding: "2px 6px",
-                                fontSize: "11px",
-                                borderRadius: "6px",
-                                border: "1px solid #112234",
-                                background: "#1a2235",
-                                color: "white",
-                                cursor: "pointer"
-                            }}
-                        >
-                            Reset
-                        </button>
+                        {!isEditingRoster ? (
+                            <div style={{display: "flex", justifyContent: "flex-end", gap: "8px"}}>
+                                <button
+                                    onClick={resetFilters}
+                                    style={{
+                                        width: "15%",
+                                        marginTop: "10px",
+                                        marginLeft: "auto",
+                                        display: "block",
+                                        padding: "2px 6px",
+                                        fontSize: "11px",
+                                        borderRadius: "6px",
+                                        border: "1px solid #112234",
+                                        background: "#1a2235",
+                                        color: "white",
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    Reset
+                                </button>
+
+                                <button
+                                    onClick={startEditRoster}
+                                    style={{
+                                        width: "18%",
+                                        marginTop: "10px",
+                                        display: "block",
+                                        padding: "2px 6px",
+                                        fontSize: "11px",
+                                        borderRadius: "6px",
+                                        border: "1px solid #112234",
+                                        background: "#2563eb",
+                                        color: "white",
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    Edit Roster
+                                </button>
+                            </div>
+                        ) : (
+                            <div style={{display: "flex", justifyContent: "flex-end", alignItems: "center", gap: "8px"}}>
+                                <label style={{color: "#cbd5e1", fontSize: "13px"}}>
+                                    <input
+                                        type="checkbox"
+                                        checked={filteredCharacters.length > 0 && filteredCharacters.every((ch) => stagedOwnedIds.has(ch.id))}
+                                        onChange={() => toggleSelectAllFor(filteredCharacters)}
+                                    /> Select all
+                                </label>
+
+                                <button
+                                    onClick={saveEditRoster}
+                                    style={{
+                                        width: "12%",
+                                        marginTop: "10px",
+                                        display: "block",
+                                        padding: "2px 6px",
+                                        fontSize: "11px",
+                                        borderRadius: "6px",
+                                        border: "1px solid #112234",
+                                        background: "#16a34a",
+                                        color: "white",
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    Save
+                                </button>
+
+                                <button
+                                    onClick={cancelEditRoster}
+                                    style={{
+                                        width: "12%",
+                                        marginTop: "10px",
+                                        display: "block",
+                                        padding: "2px 6px",
+                                        fontSize: "11px",
+                                        borderRadius: "6px",
+                                        border: "1px solid #112234",
+                                        background: "#1a2235",
+                                        color: "white",
+                                        cursor: "pointer"
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        )}
                     </div>
 
                     {/* CHARACTER GRID */}
@@ -241,81 +365,67 @@ function TeamBuilder() {
                             gap: "6px"
                         }}
                     >
-                        {characters
-                            .filter((c) => {
-                                const roleMatch =
-                                    roleFilter === "All" || c.role === roleFilter;
+                        {filteredCharacters.map((c) => {
+                                const isOwned = isEditingRoster ? stagedOwnedIds.has(c.id) : ownedCharacterIds.has(c.id);
 
-                                const elementMatch =
-                                    elementFilter === "All" || c.element === elementFilter;
-
-                                const searchMatch =
-                                    c.name.toLowerCase().includes(search.toLowerCase());
-                                const pathMatch =
-                                    pathFilter === "All" || c.path === pathFilter;
-
-                                const rarityMatch =
-                                    rarityFilter === "All" || String(c.rarity) === rarityFilter;
-
-                                return roleMatch && elementMatch && pathMatch && rarityMatch && searchMatch;
-                            })
-                            .sort((a, b) => a.name.localeCompare(b.name))
-                            .map((c) => (
-                                <div
-                                    key={c.id}
-                                    onClick={() => {
-                                        setSelectedCharacter(c);
-                                        navigate(`/build/${c.name}`);
-                                        scrollToTop();
-                                    }}
-                                    // onMouseEnter={(e) =>
-                                    //     e.currentTarget.style.background = "#f0f4ff"
-                                    // }
-                                    // onMouseLeave={(e) =>
-                                    //     e.currentTarget.style.background =
-                                    //         selectedCharacter?.id === c.id
-                                    //             ? "#e6f0ff"
-                                    //             : "white"
-                                    // }
-                                    style={{
-                                        width: "100%",
-                                        aspectRatio: "1 / 1",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "center",
-                                        justifyContent: "flex-start",
-                                        paddingTop:"2px",
-                                        cursor: "pointer",
-                                        transition: "0.2s",
-                                        transform: selectedCharacter?.id === c.id ? "scale(1.1)" : "scale(1)",
-                                    }}
-                                >
-                                    <img
-                                        src={`http://localhost:8080${c.iconUrl}`}
-                                        alt={c.name}
-                                        style={{
-                                            width: "70%",
-                                            height: "70%",
-                                            objectFit: "cover",
-                                            borderRadius: "10px",
-                                        }}
-                                    />
+                                return (
                                     <div
+                                        key={c.id}
+                                        onClick={() => {
+                                            if (isEditingRoster) {
+                                                toggleStagedOwned(c.id);
+                                            } else {
+                                                setSelectedCharacter(c);
+                                                navigate(`/build/${c.name}`);
+                                                scrollToTop();
+                                            }
+                                        }}
                                         style={{
-                                            marginTop:"4px",
-                                            fontSize: "11px",
-                                            color: "#cbd5e1",
-                                            textAlign: "center",
-                                            whiteSpace: "normal",
-                                            maxWidth: "100%",
-                                            wordBreak: "break-word",
-                                            lineHeight: "1.1"
+                                            width: "100%",
+                                            aspectRatio: "1 / 1",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            alignItems: "center",
+                                            justifyContent: "flex-start",
+                                            paddingTop: "2px",
+                                            cursor: "pointer",
+                                            opacity: isOwned ? 1 : 0.35,
+                                            filter: isOwned ? "none" : "grayscale(1)",
+                                            transition: "0.2s",
+                                            transform:
+                                                selectedCharacter?.id === c.id
+                                                    ? "scale(1.1)"
+                                                    : "scale(1)",
                                         }}
                                     >
-                                        {c.name}
+                                        <img
+                                            src={`http://localhost:8080${c.iconUrl}`}
+                                            alt={c.name}
+                                            style={{
+                                                width: "70%",
+                                                height: "70%",
+                                                objectFit: "cover",
+                                                borderRadius: "10px",
+                                            }}
+                                        />
+
+                                        <div
+                                            style={{
+                                                marginTop: "4px",
+                                                fontSize: "11px",
+                                                color: "#cbd5e1",
+                                                textAlign: "center",
+                                                whiteSpace: "normal",
+                                                maxWidth: "100%",
+                                                wordBreak: "break-word",
+                                                lineHeight: "1.1",
+                                            }}
+                                        >
+                                            {c.name}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                     </div>
                 </div>
                 {/* RIGHT PANEL */}
@@ -382,7 +492,7 @@ function TeamBuilder() {
                                                 }}>
                                                     {team.characters.map((c, idx) => {
                                                         const charData = characters.find(x => x.name === c);
-
+                                                        const isOwned = charData && ownedCharacterIds.has(charData.id);
                                                         return (
                                                             <div
                                                                 key={idx}
@@ -401,7 +511,9 @@ function TeamBuilder() {
                                                                         height: "90px",
                                                                         borderRadius: "12px",
                                                                         objectFit: "cover",
-                                                                        border: "1px solid #2a3b4d"
+                                                                        border: "1px solid #2a3b4d",
+                                                                        opacity: isOwned ? 1 : 0.35,
+                                                                        filter: isOwned ? "none" : "grayscale(1)",
                                                                     }}
                                                                 />
                                                                 <span style={{
@@ -478,8 +590,7 @@ function TeamBuilder() {
                                                         <div style={{display: "flex", gap: "10px"}}>
                                                             {group.bis.map((name, idx) => {
                                                                 const charData = characters.find(c => c.name === name);
-
-                                                                return (
+                                                                const isOwned = charData && ownedCharacterIds.has(charData.id);                                                                return (
                                                                     <div
                                                                         key={idx}
                                                                         style={{
@@ -496,7 +607,9 @@ function TeamBuilder() {
                                                                                 height: "70px",
                                                                                 borderRadius: "12px",
                                                                                 objectFit: "cover",
-                                                                                border: "2px solid #d4af37"
+                                                                                border: "2px solid #d4af37",
+                                                                                opacity: isOwned ? 1 : 0.35,
+                                                                                filter: isOwned ? "none" : "grayscale(1)",
                                                                             }}/>
                                                                         <div style={{
                                                                             fontSize: "12px",
@@ -531,7 +644,7 @@ function TeamBuilder() {
                                                         <div style={{display: "flex", gap: "10px"}}>
                                                             {group.generalist.map((name, idx) => {
                                                                 const charData = characters.find(c => c.name === name);
-
+                                                                const isOwned = charData && ownedCharacterIds.has(charData.id);
                                                                 return (
                                                                     <div
                                                                         key={idx}
@@ -550,7 +663,9 @@ function TeamBuilder() {
                                                                                 height: "70px",
                                                                                 borderRadius: "12px",
                                                                                 objectFit: "cover",
-                                                                                border: "2px solid #64748b"
+                                                                                border: "2px solid #64748b",
+                                                                                opacity: isOwned ? 1 : 0.35,
+                                                                                filter: isOwned ? "none" : "grayscale(1)",
                                                                             }}
                                                                         />
                                                                         <div style={{
@@ -586,6 +701,7 @@ function TeamBuilder() {
                                                         <div style={{display: "flex", gap: "10px"}}>
                                                             {group.f2p.map((name, idx) => {
                                                                 const charData = characters.find(c => c.name === name);
+                                                                const isOwned = charData && ownedCharacterIds.has(charData.id);
 
                                                                 return (
                                                                     <div
@@ -605,7 +721,9 @@ function TeamBuilder() {
                                                                                 height: "70px",
                                                                                 borderRadius: "12px",
                                                                                 objectFit: "cover",
-                                                                                border: "2px solid #22c55e"
+                                                                                border: "2px solid #22c55e",
+                                                                                opacity: isOwned ? 1 : 0.35,
+                                                                                filter: isOwned ? "none" : "grayscale(1)",
                                                                             }}
                                                                         />
                                                                         <div style={{
