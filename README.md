@@ -70,11 +70,13 @@ project-root/
 │       │       └── github/
 │       │           └── jna6/
 │       │               └── hsrteambuilder/
-│       │                   ├── web/          # Controllers: GameCharacterController, TeamController, UserController
+│       │                   ├── web/          # Controllers: GameCharacterController, UserController
 │       │                   ├── service/      # Service layer
 │       │                   ├── repository/   # JPA repositories
-│       │                   └── config/       # CorsConfig.java
-│       └── resources/                         # application.properties, data.sql, DataLoader
+│       │                   ├── model/        # JPA entities (GameCharacter, Team, User)
+│       │                   ├── dto/          # DTOs and response models (CharacterBuildResponse, TeamComposition, etc.)
+│       │                   └── data/         # CharacterBuildDataLoader and related build data
+│       └── resources/                        # application.properties, data.sql, avatars
 ├── hsr-frontend/
 │   ├── package.json
 │   └── src/
