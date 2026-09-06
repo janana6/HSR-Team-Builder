@@ -1,4 +1,4 @@
-package io.github.jna6.hsrteambuilder.model;
+package io.github.janana6.hsrteambuilder.model;
 
 import jakarta.persistence.*;
 import java.util.ArrayList;

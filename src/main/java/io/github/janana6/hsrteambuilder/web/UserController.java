@@ -1,7 +1,7 @@
-package io.github.jna6.hsrteambuilder.web;
+package io.github.janana6.hsrteambuilder.web;
 
-import io.github.jna6.hsrteambuilder.model.User;
-import io.github.jna6.hsrteambuilder.service.UserService;
+import io.github.janana6.hsrteambuilder.model.User;
+import io.github.janana6.hsrteambuilder.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

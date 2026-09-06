@@ -1,6 +1,6 @@
-package io.github.jna6.hsrteambuilder.repository;
+package io.github.janana6.hsrteambuilder.repository;
 
-import io.github.jna6.hsrteambuilder.model.GameCharacter;
+import io.github.janana6.hsrteambuilder.model.GameCharacter;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

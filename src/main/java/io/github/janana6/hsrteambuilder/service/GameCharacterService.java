@@ -1,9 +1,9 @@
-package io.github.jna6.hsrteambuilder.service;
+package io.github.janana6.hsrteambuilder.service;
 
-import io.github.jna6.hsrteambuilder.data.CharacterBuildDataLoader;
-import io.github.jna6.hsrteambuilder.dto.CharacterBuildResponse;
-import io.github.jna6.hsrteambuilder.model.GameCharacter;
-import io.github.jna6.hsrteambuilder.repository.GameCharacterRepository;
+import io.github.janana6.hsrteambuilder.data.CharacterBuildDataLoader;
+import io.github.janana6.hsrteambuilder.dto.CharacterBuildResponse;
+import io.github.janana6.hsrteambuilder.model.GameCharacter;
+import io.github.janana6.hsrteambuilder.repository.GameCharacterRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;

@@ -1,7 +1,7 @@
-package io.github.jna6.hsrteambuilder.web;
+package io.github.janana6.hsrteambuilder.web;
 
-import io.github.jna6.hsrteambuilder.dto.CharacterBuildResponse;
-import io.github.jna6.hsrteambuilder.service.GameCharacterService;
+import io.github.janana6.hsrteambuilder.dto.CharacterBuildResponse;
+import io.github.janana6.hsrteambuilder.service.GameCharacterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -68,7 +68,7 @@ project-root/
 │       ├── java/
 │       │   └── io/
 │       │       └── github/
-│       │           └── jna6/
+│       │           └── janana6/
 │       │               └── hsrteambuilder/
 │       │                   ├── web/          # Controllers: GameCharacterController, UserController
 │       │                   ├── service/      # Service layer
@@ -90,7 +90,6 @@ project-root/
 
 All character-related endpoints are available under:
 
-```text
 /characters
 ```
 

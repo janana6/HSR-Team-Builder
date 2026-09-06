@@ -1,7 +1,7 @@
-package io.github.jna6.hsrteambuilder.service;
+package io.github.janana6.hsrteambuilder.service;
 
-import io.github.jna6.hsrteambuilder.model.User;
-import io.github.jna6.hsrteambuilder.repository.UserRepository;
+import io.github.janana6.hsrteambuilder.model.User;
+import io.github.janana6.hsrteambuilder.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,9 +1,9 @@
-package io.github.jna6.hsrteambuilder.data;
+package io.github.janana6.hsrteambuilder.data;
 
-import io.github.jna6.hsrteambuilder.dto.BuildVariant;
-import io.github.jna6.hsrteambuilder.dto.CharacterBuildResponse;
-import io.github.jna6.hsrteambuilder.dto.TeamComposition;
-import io.github.jna6.hsrteambuilder.dto.TeammateRecommendation;
+import io.github.janana6.hsrteambuilder.dto.BuildVariant;
+import io.github.janana6.hsrteambuilder.dto.CharacterBuildResponse;
+import io.github.janana6.hsrteambuilder.dto.TeamComposition;
+import io.github.janana6.hsrteambuilder.dto.TeammateRecommendation;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 

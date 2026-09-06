@@ -1,4 +1,4 @@
-package io.github.jna6.hsrteambuilder.config;
+package io.github.janana6.hsrteambuilder.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

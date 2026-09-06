@@ -1,4 +1,4 @@
-package io.github.jna6.hsrteambuilder.dto;
+package io.github.janana6.hsrteambuilder.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

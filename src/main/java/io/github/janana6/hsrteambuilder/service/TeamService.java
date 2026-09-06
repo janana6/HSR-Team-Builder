@@ -1,9 +1,9 @@
-package io.github.jna6.hsrteambuilder.service;
+package io.github.janana6.hsrteambuilder.service;
 
 
-import io.github.jna6.hsrteambuilder.model.Team;
+import io.github.janana6.hsrteambuilder.model.Team;
 
-import io.github.jna6.hsrteambuilder.repository.TeamRepository;
+import io.github.janana6.hsrteambuilder.repository.TeamRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
