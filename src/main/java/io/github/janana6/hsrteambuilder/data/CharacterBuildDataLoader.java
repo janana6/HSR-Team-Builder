@@ -62,6 +62,14 @@ public class CharacterBuildDataLoader {
         add("Silver Wolf", silverwolfBuild());
         add("Silver Wolf LV.999", silverwolflv999Build());
         add("Hysilens", hysilensBuild());
+        add("Jiaoqiu", jiaoqiuBuild());
+        add("Bailu",bailuBuild());
+        add("Bronya",bronyaBuild());
+        add("Dr. Ratio", drratioBuild());
+        add("Fu Xuan", fuxuanBuild());
+        add("Gepard",gepardBuild());
+        add("The Dahlia",thedahliaBuild());
+        add("Herta",hertaBuild());
     }
 
     private void add(String name, CharacterBuildResponse build) {
@@ -100,7 +108,7 @@ public class CharacterBuildDataLoader {
     private CharacterBuildResponse fireflyBuild() {
         return response(
                 variant(
-                        "Break",
+                        "Premium Break Team",
                         List.of(
                                 team("BiS Team", "Firefly", "Fugue", "The Dahlia", "Lingsha"),
                                 team("F2P Team", "Firefly", "Trailblazer (Harmony)", "Ruan Mei", "Gallagher")
@@ -660,10 +668,27 @@ public class CharacterBuildDataLoader {
     private CharacterBuildResponse cipherBuild() {
         return response(
                 variant(
-                        "Generalist Team",
+                        "Archer Team",
                         List.of(
-                                team("BiS Team", "Acheron", "Cipher", "Mortenax Blade", "Hyacine"),
-                                team("BiS Team", "Archer", "Cipher", "Sparkle", "Dan Heng Permansor Terrae")
+                                team("BiS Team", "Archer", "Cipher", "Rin Tohsaka", "Dan Heng Permansor Terrae")
+                        ),
+                        List.of(
+
+                        )
+                ),
+                variant(
+                        "DoT Team",
+                        List.of(
+                                team("BiS Team", "Kafka", "Black Swan", "Hysilens", "Cipher")
+                        ),
+                        List.of(
+
+                        )
+                ),
+                variant(
+                        "Acheron Team",
+                        List.of(
+                                team("BiS Team", "Acheron", "Cipher", "Mortenax Blade", "Hyacine")
                         ),
                         List.of(
 
@@ -1316,6 +1341,236 @@ public class CharacterBuildDataLoader {
                                         List.of("Hyacine"),
                                         List.of("Gallagher")
                                 )
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse jiaoqiuBuild() {
+        return response(
+                variant(
+                        "DoT Team",
+                        List.of(
+                                team("BiS Team", "Kafka", "Hysilens", "Black Swan", "Jiaoqiu")
+                        ),
+                        List.of(
+                                )
+
+                ),
+                variant(
+                        "Acheron Team",
+                        List.of(
+                                team("BiS Team", "Acheron", "Jiaoqiu", "Mortenax Blade", "Hyacine")
+                        ),
+                        List.of(
+
+                        )
+
+                ),
+                variant(
+                        "Himeko Nova Team",
+                        List.of(
+                                team("BiS Team", "Himeko Nova", "Jiaoqiu", "Welt", "Dan Heng Permansor Terrae")
+                        ),
+                        List.of(
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse aventurineBuild() {
+        return response(
+                variant(
+                        "Elation Team",
+                        List.of(
+                                team("BiS Team", "Silver Wolf LV.999", "Sparxie", "Yao Guang", "Aventurine")
+                        ),
+                        List.of(
+                        )
+
+                ),
+                variant(
+                        "DoT Team",
+                        List.of(
+                                team("BiS Team", "Kafka", "Hysilens", "Black Swan", "Aventurine")
+                        ),
+                        List.of(
+                        )
+
+                ),
+                variant(
+                        "Acheron Team",
+                        List.of(
+                                team("BiS Team", "Acheron", "Mortenax Blade", "Tribbie", "Aventurine")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "Himeko Nova Team",
+                        List.of(
+                                team("BiS Team", "Himeko Nova", "Robin Summeretto", "Welt", "Aventurine")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "Archer Team",
+                        List.of(
+                                team("BiS Team", "Archer", "Sparkle", "Rin Tohsaka", "Aventurine")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "The Herta Team",
+                        List.of(
+                                team("BiS Team", "The Herta", "Herta", "Tribbie", "Aventurine")
+                        ),
+                        List.of(
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse bailuBuild() {
+        return response(
+                variant(
+                        "Elation Team",
+                        List.of(
+                                team("BiS Team", "Silver Wolf LV.999", "Sparxie", "Yao Guang", "Bailu")
+                        ),
+                        List.of(
+                        )
+
+                ),
+                variant(
+                        "DoT Team",
+                        List.of(
+                                team("BiS Team", "Kafka", "Hysilens", "Black Swan", "Bailu")
+                        ),
+                        List.of(
+                        )
+
+                ),
+                variant(
+                        "Archer Team",
+                        List.of(
+                                team("BiS Team", "Archer", "Sparkle", "Rin Tohsaka", "Bailu")
+                        ),
+                        List.of(
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse bronyaBuild() {
+        return response(
+                variant(
+                        "Phainon Team",
+                        List.of(
+                                team("BiS Team", "Phainon", "Bronya", "Cerydra", "Sunday")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "Himeko Nova Team",
+                        List.of(
+                                team("BiS Team", "Himeko Nova", "Bronya", "Sunday", "Dan Heng Permansor Terrae")
+                        ),
+                        List.of(
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse drratioBuild() {
+        return response(
+                variant(
+                        "AshBlade Team",
+                        List.of(
+                                team("BiS Team", "Mortenax Blade", "Ashveil", "Dr. Ratio", "Silver Wolf")
+                        ),
+                        List.of(
+                        )
+
+                )
+        );
+    }
+    private CharacterBuildResponse fuxuanBuild() {
+        return response(
+                variant(
+                        "Archer Team",
+                        List.of(
+                                team("BiS Team", "Archer", "Sparkle", "Rin Tohsaka", "Fu Xuan")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "Elatiom Team",
+                        List.of(
+                                team("BiS Team", "Silver Wolf LV.999", "Sparxie", "Yao Guang", "Fu Xuan")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "Evanescia Team",
+                        List.of(
+                                team("BiS Team", "Evanescia", "Trailblazer (Elation)", "Yao Guang", "Fu Xuan")
+                        ),
+                        List.of(
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse gepardBuild() {
+        return response(
+                variant(
+                        "Elatiom Team",
+                        List.of(
+                                team("BiS Team", "Silver Wolf LV.999", "Sparxie", "Yao Guang", "Gepard")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "Evanescia Team",
+                        List.of(
+                                team("BiS Team", "Evanescia", "Trailblazer (Elation)", "Yao Guang", "Gepard")
+                        ),
+                        List.of(
+                        )
+                ),
+                variant(
+                        "DoT Team",
+                        List.of(
+                                team("BiS Team", "Kafka", "Hysilens", "Black Swan", "Gepard")
+                        ),
+                        List.of(
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse hertaBuild() {
+        return response(
+                variant(
+                        "The Herta Team",
+                        List.of(
+                                team("BiS Team", "The Herta", "Herta", "Tribbie", "Dan Heng Permansor Terrae")
+                        ),
+                        List.of(
+                        )
+                )
+        );
+    }
+    private CharacterBuildResponse thedahliaBuild() {
+        return response(
+                variant(
+                        "Premium Break Team",
+                        List.of(
+                                team("BiS Team", "Firefly", "Fugue", "The Dahlia", "Lingsha")
+                        ),
+                        List.of(
+
+
                         )
                 )
         );
