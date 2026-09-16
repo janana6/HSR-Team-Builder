@@ -2,6 +2,7 @@ package io.github.janana6.hsrteambuilder.web;
 
 import io.github.janana6.hsrteambuilder.dto.CharacterBuildResponse;
 import io.github.janana6.hsrteambuilder.service.GameCharacterService;
+import io.github.janana6.hsrteambuilder.model.GameCharacter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,17 +11,18 @@ import java.util.List;
 @RestController
 @RequestMapping("/characters")
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:5173"})
 public class GameCharacterController {
 
     private final GameCharacterService characterService;
 
     @GetMapping
-    public List<?> getAllCharacters() {
+    public List<GameCharacter> getAllCharacters() {
         return characterService.getAllCharacters();
     }
 
     @GetMapping("/filter")
-    public List<?> filterCharacters(
+    public List<GameCharacter> filterCharacters(
             @RequestParam(required = false) String role,
             @RequestParam(required = false) String element,
             @RequestParam(required = false) String path,
