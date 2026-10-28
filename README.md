@@ -1,151 +1,152 @@
-# Honkai: Star Rail Team Builder
+# Honkai Star Rail Team Builder
 
-A full-stack web application for exploring Honkai: Star Rail characters, viewing build recommendations, and creating stronger team compositions.
+HSR Team Builder is a full-stack web app for exploring Honkai: Star Rail characters, filtering the roster, and viewing suggested team comps built around each character.
 
-The project combines a React frontend with a Spring Boot REST API and PostgreSQL database. Users can browse characters, filter the roster, open dedicated build pages, and find teammate recommendations suited to different investment levels.
+The project combines a Spring Boot backend with a React frontend. The backend exposes character data and build recommendations, while the frontend lets users browse the roster, filter characters, and open dedicated build pages.
 
 ## Features
 
-- Browse Honkai: Star Rail characters
-- Filter characters by:
-    - Rarity
-    - Role
-    - Element
-    - Path
-- View character build pages through routes such as `/build/Acheron`
-- Case-insensitive character URLs, so `/build/Acheron`, `/build/acheron`, and `/build/ACHERON` load the same character
-- Character build data provided through a backend data loader
-- Team composition support and teammate recommendations:
-    - BiS (Best in Slot)
-    - Generalist
-    - F2P-friendly
-- React Router navigation
-- Smooth navigation back to the top of the page when selecting a character
-- REST API for character data under `/characters`
+- Browse the current Honkai: Star Rail roster
+- Filter characters by rarity, role, element, and path
+- Search characters by name
+- Open per-character build pages at `/build/:name`
+- View recommended teammates grouped by playstyle:
+  - BiS
+  - Generalist
+  - F2P-friendly
+- Track owned characters locally in the browser for roster planning
+- Call the backend API from the frontend via CORS
 
 ## Tech Stack
 
-### Frontend
-
-- React
-- React Router
-- JavaScript
-- CSS
-
-### Backend
-
-- Java
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-
-### Database
-
-- PostgreSQL
-
-## Architecture
-
-```text
-React Frontend
-   │
-   │ HTTP requests
-   ▼
-Spring Boot REST API
-   │
-   ├── Character repository / PostgreSQL database
-   └── Build DataLoader
-```
-
-The frontend requests character information from the Spring Boot API. The API retrieves character records from PostgreSQL and combines them with build data loaded through the application's `DataLoader`.
+- Frontend: React, Vite, React Router
+- Backend: Java 21, Spring Boot 3.5, Spring Web, Spring Data JPA
+- Database: PostgreSQL
+- Local infrastructure: Docker Compose
 
 ## Project Structure
 
 ```text
-project-root/
+.
+├── .env
+├── .gitignore
+├── compose.yaml
+├── HELP.md
+├── mvnw
+├── mvnw.cmd
 ├── pom.xml
+├── README.md
 ├── src/
-│   └── main/
-│       ├── java/
-│       │   └── io/
-│       │       └── github/
-│       │           └── janana6/
-│       │               └── hsrteambuilder/
-│       │                   ├── web/          # Controllers: GameCharacterController, UserController
-│       │                   ├── service/      # Service layer
-│       │                   ├── repository/   # JPA repositories
-│       │                   ├── model/        # JPA entities (GameCharacter, Team, User)
-│       │                   ├── dto/          # DTOs and response models (CharacterBuildResponse, TeamComposition, etc.)
-│       │                   └── data/         # CharacterBuildDataLoader and related build data
-│       └── resources/                        # application.properties, data.sql, avatars
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── io/github/janana6/hsrteambuilder/
+│   │   │       ├── config/
+│   │   │       ├── data/
+│   │   │       ├── dto/
+│   │   │       ├── model/
+│   │   │       ├── repository/
+│   │   │       ├── service/
+│   │   │       └── web/
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       ├── data.sql
+│   │       └── static/avatar/
+│   └── test/
+│       └── java/io/github/janana6/hsrteambuilder/
 ├── hsr-frontend/
 │   ├── package.json
+│   ├── package-lock.json
+│   ├── vite.config.js
+│   ├── index.html
+│   ├── public/
 │   └── src/
 │       ├── App.jsx
 │       ├── TeamBuilder.jsx
-│       └── main.jsx
-├── .gitignore
-└── README.md
-
-## API Endpoints
-
-All character-related endpoints are available under:
-
-/characters
+│       ├── main.jsx
+│       ├── index.css
+│       └── components/
+│           ├── CharacterAvatar.jsx
+│           ├── CharacterFilters.jsx
+│           ├── CharacterGrid.jsx
+│           ├── LeftPanel.jsx
+│           ├── RightPanel.jsx
+│           ├── TeamCompositions.jsx
+│           ├── TeammateList.jsx
+└── target/
 ```
 
-Typical character API functionality includes:
+## Backend Overview
 
-| Endpoint | Description |
-| --- | --- |
-| `GET /characters` | Returns the available character roster |
-| `GET /characters/{name}` | Returns details for one character |
-| `GET /characters/build/{name}` | Returns build information for one character |
+The backend is a Spring Boot application with a PostgreSQL data store and a lightweight service layer.
 
-Character names are matched without regard to capitalization. For example:
+### Main backend packages
 
-```text
-/build/Acheron
-/build/acheron
-/build/ACHERON
+- `config/` – application configuration, including CORS setup
+- `data/` – data loading logic for character build metadata
+- `dto/` – request/response objects
+- `model/` – JPA entities such as `GameCharacter`, `User`, and `Team`
+- `repository/` – Spring Data repositories
+- `service/` – business logic for characters, users, and team data
+- `web/` – REST controllers such as `GameCharacterController` and `UserController`
+
+## Frontend Overview
+
+The frontend is a Vite + React app that renders the roster and build pages.
+
+### Main frontend routes
+
+- `/` – home roster view
+- `/characters` – roster view
+- `/build/:name` – dedicated character build page
+
+The frontend fetches data from the backend at `http://localhost:8080` and renders it in the UI.
+
+## Local Setup
+
+### 1. Start PostgreSQL
+
+The project includes a Docker Compose file for the database.
+
+```bash
+docker compose up -d postgres
 ```
 
-all open the same Acheron build page.
+This uses the values in the root `.env` file.
 
-## Running the Project
+### 2. Configure environment variables
 
-### 1. Set up PostgreSQL
+If you are not using Docker, make sure a PostgreSQL instance is running on `localhost:5432` with the same database name and credentials.
 
-Create or configure a PostgreSQL database for the Spring Boot backend.
+### 3. Start the backend
 
-Update the backend database configuration with your local PostgreSQL connection details, including:
+From the project root:
 
-- Database URL
-- Username
-- Password
+```bash
+./mvnw spring-boot:run
+```
 
-Make sure PostgreSQL is running before starting the backend.
-
-### 2. Start the Spring Boot Backend
-
-Open the backend project in your preferred Java IDE or use the Spring Boot run command configured for your project.
-
-The backend runs locally on:
+The backend runs on:
 
 ```text
 http://localhost:8080
 ```
 
-### 3. Start the React Frontend
+### 4. Start the frontend
 
-Open the frontend project and run its configured development script.
+From the `hsr-frontend` directory:
 
-The frontend runs locally on:
+```bash
+npm install
+npm run dev
+```
+
+The frontend runs on:
 
 ```text
 http://localhost:5173
 ```
 
-### 4. Open the Application
+### 5. Open the app
 
 Visit:
 
@@ -153,48 +154,42 @@ Visit:
 http://localhost:5173
 ```
 
-The React application communicates with the Spring Boot API at:
+## API Endpoints
+
+The backend exposes character data under the `/characters` route.
+
+### Character endpoints
+
+- `GET /characters` – return the full roster
+- `GET /characters/filter` – filter the roster by query params such as:
+  - `role`
+  - `element`
+  - `path`
+  - `rarity`
+- `GET /characters/build/{name}` – return build info and recommended teammates for a character
+
+Examples:
 
 ```text
-http://localhost:8080
+GET /characters
+GET /characters/build/Acheron
 ```
 
-## Character Build Pages
-
-Each character can be opened through a dedicated route:
-
-```text
-/build/{characterName}
-```
-
-Example:
-
-```text
-/build/Acheron
-```
-
-The backend resolves the character from PostgreSQL using a case-insensitive lookup. It then loads the corresponding build information from the build data loader and returns a combined build response containing character details and recommendations.
-
-## Team Recommendations
-
-Character build pages can include recommended teammates grouped by playstyle and availability:
-
-- **BiS:** optimal teammates for the character’s strongest team
-- **Generalist:** flexible options that work in many teams
-- **F2P:** accessible alternatives for players with limited character availability
+Character names are resolved in a case-insensitive manner in the UI route and API flow.
 
 ## Future Improvements
 
 - Save custom team compositions
+- Add user authentication and profiles
+- Add a "Favorites" feature for teams
 - Add detailed synergy explanations
-- Add character comparison tools
 
-## Local Development Notes
+## Notes for Development
 
-- Backend default port: `8080`
-- Frontend default port: `5173`
-- Ensure the frontend is configured to request data from the local backend.
-- Ensure the backend accepts requests from the frontend development server if cross-origin configuration is required.
+- The backend is configured for PostgreSQL and uses port `8080`.
+- The React app uses Vite and runs on port `5173`.
+- CORS is enabled for `http://localhost:5173`.
+- Character avatar images are stored under `src/main/resources/static/avatar/`.
 
 ## License
 
